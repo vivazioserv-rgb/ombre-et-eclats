@@ -39,45 +39,48 @@ export default async function HomePage() {
       <Navbar brandName={brandName} />
       <Cart />
       <main className="min-h-screen">
-        {/* Hero plein écran, fond image sombre + logo */}
-        <section className="relative min-h-[85vh] overflow-hidden bg-black">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={heroImage}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover opacity-45"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black" />
-
-          <div className="relative mx-auto flex min-h-[85vh] max-w-4xl flex-col items-center justify-center px-6 py-24 text-center">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={siteConfig.brand.logoUrl}
-              alt={brandName}
-              className="mx-auto mb-10 w-auto max-w-md md:max-w-lg lg:max-w-xl"
-            />
-            <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.35em] text-[var(--primary)]">
-              Spécial Argent 925
-            </p>
-            <h1 className="font-serif text-4xl leading-tight text-[var(--foreground)] sm:text-5xl lg:text-6xl">
-              {heroTitle}
-            </h1>
-            <p className="mt-6 max-w-xl text-base text-[var(--foreground)]/70">{heroSubtitle}</p>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-              <Link
-                href="/catalogue"
-                className="rounded-sm bg-[var(--primary)] px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-black hover:bg-[var(--primary-dark)]"
-              >
-                Découvrir les collections
-              </Link>
-              {siteConfig.features.customOrders && (
+        {/* Hero — texte justifié à gauche, chevalière argent à droite */}
+        <section className="relative overflow-hidden bg-black">
+          <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:gap-16 lg:py-28">
+            {/* Texte */}
+            <div className="flex flex-col">
+              <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.4em] text-[var(--primary)]">
+                Spécial Argent 925
+              </p>
+              <h1 className="font-serif text-4xl leading-[1.05] text-[var(--foreground)] sm:text-5xl lg:text-6xl">
+                {heroTitle}
+              </h1>
+              <p className="mt-8 max-w-xl text-justify text-base leading-relaxed text-[var(--foreground)]/70">
+                {heroSubtitle}
+              </p>
+              <div className="mt-10 flex flex-wrap gap-3">
                 <Link
-                  href="/sur-mesure"
-                  className="rounded-sm border border-[var(--primary)] px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-black"
+                  href="/catalogue"
+                  className="rounded-sm bg-[var(--primary)] px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-black hover:bg-[var(--primary-dark)]"
                 >
-                  Pièce sur-mesure
+                  Découvrir les collections
                 </Link>
-              )}
+                {siteConfig.features.customOrders && (
+                  <Link
+                    href="/sur-mesure"
+                    className="rounded-sm border border-[var(--primary)] px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-black"
+                  >
+                    Pièce sur-mesure
+                  </Link>
+                )}
+              </div>
+            </div>
+
+            {/* Chevalière argent */}
+            <div className="relative">
+              <div className="relative mx-auto aspect-square w-full max-w-lg overflow-hidden rounded-sm ring-1 ring-[var(--primary)]/20">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=1400&auto=format&fit=crop&q=90"
+                  alt="Chevalière en argent massif"
+                  className="h-full w-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </section>

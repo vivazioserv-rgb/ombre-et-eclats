@@ -20,13 +20,13 @@ export default function Navbar({ brandName = siteConfig.brand.name }: { brandNam
         {siteConfig.brand.banner} <span className="ml-1">{siteConfig.brand.bannerSymbol}</span>
       </div>
       <header className="sticky top-0 z-40 border-b border-[var(--accent)] bg-black/95 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:h-20">
+        <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6 md:h-28">
           <Link href="/" className="flex items-center" aria-label={brandName}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={siteConfig.brand.logoUrl}
               alt={brandName}
-              className="h-12 w-auto object-contain md:h-14"
+              className="h-20 w-auto object-contain md:h-24"
             />
           </Link>
           <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
