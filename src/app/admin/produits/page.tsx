@@ -56,7 +56,7 @@ export default function AdminProductsPage() {
         <h1 className="font-serif text-3xl">Produits</h1>
         <button
           onClick={() => setEditing(newProduct())}
-          className="flex items-center gap-2 rounded-sm bg-[var(--primary)] px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white hover:bg-[var(--primary-dark)]"
+          className="flex items-center gap-2 rounded-sm bg-[var(--primary)] px-4 py-2 text-xs font-semibold uppercase tracking-widest text-[var(--background)] hover:bg-[var(--primary-dark)]"
         >
           <Plus className="h-4 w-4" /> Nouveau
         </button>
@@ -67,7 +67,7 @@ export default function AdminProductsPage() {
       ) : (
         <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
           <table className="w-full text-sm">
-            <thead className="bg-[var(--muted)] text-xs uppercase tracking-wider text-[var(--foreground)]/60">
+            <thead className="bg-gray-50 text-xs uppercase tracking-wider text-gray-500">
               <tr>
                 <th className="px-4 py-3 text-left">Produit</th>
                 <th className="px-4 py-3 text-left">Catégorie</th>
@@ -77,28 +77,28 @@ export default function AdminProductsPage() {
                 <th className="px-4 py-3"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[var(--accent)]">
+            <tbody className="divide-y divide-gray-200">
               {products.map((p) => (
-                <tr key={p._id} className="hover:bg-[var(--muted)]/30">
+                <tr key={p._id} className="hover:bg-gray-50/30">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       {p.imageUrl ? (
                         /* eslint-disable-next-line @next/next/no-img-element */
                         <img src={p.imageUrl} alt={p.name} className="h-12 w-12 rounded-lg object-cover" />
                       ) : (
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--accent)] text-xl">🍰</div>
+                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-white text-xl">🍰</div>
                       )}
                       <div>
                         <p className="font-medium">{p.name}</p>
-                        {p.isNew && <span className="rounded bg-[var(--primary)] px-2 py-0.5 text-[9px] font-bold text-white">NEW</span>}
+                        {p.isNew && <span className="rounded bg-[var(--primary)] px-2 py-0.5 text-[9px] font-bold text-[var(--background)]">NEW</span>}
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-[var(--foreground)]/60">{p.category?.name || "—"}</td>
+                  <td className="px-4 py-3 text-gray-500">{p.category?.name || "—"}</td>
                   <td className="px-4 py-3 text-right font-semibold">{p.basePrice.toFixed(2)}€</td>
-                  <td className="px-4 py-3 text-center text-xs text-[var(--foreground)]/60">{p.delay || 2}h</td>
+                  <td className="px-4 py-3 text-center text-xs text-gray-500">{p.delay || 2}h</td>
                   <td className="px-4 py-3 text-center">
-                    <span className={`rounded-full px-2 py-0.5 text-[10px] ${p.status === "available" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}`}>
+                    <span className={`rounded-full px-2 py-0.5 text-[10px] ${p.status === "available" ? "bg-green-100 text-green-700" : "bg-gray-50 text-gray-500"}`}>
                       {p.status}
                     </span>
                   </td>
@@ -224,7 +224,7 @@ function ProductModal({ initial, categories, onClose, onSaved }: { initial: any;
               rows={3}
               value={form.longDesc}
               onChange={(e) => setForm({ ...form, longDesc: e.target.value })}
-              className="w-full rounded-lg border border-[var(--accent)] px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
+              className="w-full rounded-lg border border-gray-300 bg-white text-gray-900 px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
             />
           </div>
 
@@ -236,7 +236,7 @@ function ProductModal({ initial, categories, onClose, onSaved }: { initial: any;
               <select
                 value={form.category || ""}
                 onChange={(e) => setForm({ ...form, category: e.target.value })}
-                className="w-full rounded-lg border border-[var(--accent)] px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
+                className="w-full rounded-lg border border-gray-300 bg-white text-gray-900 px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
               >
                 <option value="">Aucune</option>
                 {categories.map((c) => (
@@ -258,7 +258,7 @@ function ProductModal({ initial, categories, onClose, onSaved }: { initial: any;
               <select
                 value={form.status}
                 onChange={(e) => setForm({ ...form, status: e.target.value })}
-                className="w-full rounded-lg border border-[var(--accent)] px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
+                className="w-full rounded-lg border border-gray-300 bg-white text-gray-900 px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
               >
                 <option value="available">Disponible</option>
                 <option value="unavailable">Indisponible</option>
@@ -273,20 +273,20 @@ function ProductModal({ initial, categories, onClose, onSaved }: { initial: any;
 
           <div>
             <label className="mb-2 block text-xs font-semibold uppercase tracking-wider">Image principale</label>
-            <p className="mb-3 text-xs text-[var(--foreground)]/50">Affichée sur la boutique et en grand sur la page produit.</p>
+            <p className="mb-3 text-xs text-gray-400">Affichée sur la boutique et en grand sur la page produit.</p>
             <div className="flex items-center gap-4">
               {form.imageUrl && (
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img src={form.imageUrl} alt="" className="h-20 w-20 rounded-lg object-cover" />
               )}
-              <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-[var(--primary)] px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white">
+              <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-[var(--primary)] px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--background)]">
                 <Upload className="h-4 w-4" /> {uploadingImg ? "Upload…" : "Changer"}
                 <input type="file" accept="image/*" onChange={handleMainImage} className="hidden" />
               </label>
             </div>
           </div>
 
-          <div className="rounded-xl border border-[var(--accent)] p-4">
+          <div className="rounded-xl border border-gray-200 p-4">
             <div className="mb-3 flex items-center justify-between">
               <h3 className="text-sm font-semibold uppercase tracking-wider">Galerie (images supplémentaires)</h3>
               <label className="flex cursor-pointer items-center gap-1 text-xs text-[var(--primary)] hover:underline">
@@ -310,11 +310,11 @@ function ProductModal({ initial, categories, onClose, onSaved }: { initial: any;
               </label>
             </div>
             {form.images.length === 0 ? (
-              <p className="text-xs text-[var(--foreground)]/50">Aucune image supplémentaire — la galerie utilisera uniquement l&apos;image principale.</p>
+              <p className="text-xs text-gray-400">Aucune image supplémentaire — la galerie utilisera uniquement l&apos;image principale.</p>
             ) : (
               <div className="grid grid-cols-4 gap-3">
                 {form.images.map((url: string, i: number) => (
-                  <div key={i} className="group relative aspect-square overflow-hidden rounded-lg bg-[var(--muted)]">
+                  <div key={i} className="group relative aspect-square overflow-hidden rounded-lg bg-gray-50">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={url} alt="" className="h-full w-full object-cover" />
                     <button
@@ -332,24 +332,24 @@ function ProductModal({ initial, categories, onClose, onSaved }: { initial: any;
 
           {/* Variant 1 (flavors) */}
           {V1.enabled && (
-          <div className="rounded-xl border border-[var(--accent)] p-4">
+          <div className="rounded-xl border border-gray-200 p-4">
             <div className="mb-3 flex items-center justify-between">
               <h3 className="text-sm font-semibold uppercase tracking-wider">{V1.label}</h3>
               <button type="button" onClick={addFlavor} className="flex items-center gap-1 text-xs text-[var(--primary)] hover:underline">
                 <Plus className="h-3 w-3" /> Ajouter {V1.labelSingular}
               </button>
             </div>
-            {form.flavors.length === 0 && <p className="text-xs text-[var(--foreground)]/50">Aucun(e) {V1.labelSingular} — le produit sera vendu tel quel.</p>}
+            {form.flavors.length === 0 && <p className="text-xs text-gray-400">Aucun(e) {V1.labelSingular} — le produit sera vendu tel quel.</p>}
             <div className="space-y-3">
               {form.flavors.map((f: any, i: number) => (
-                <div key={f._id || i} className="flex items-center gap-3 rounded-lg bg-[var(--muted)] p-3">
+                <div key={f._id || i} className="flex items-center gap-3 rounded-lg bg-gray-50 p-3">
                   {V1.hasImage && (
-                  <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-white">
+                  <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-gray-50">
                     {f.imageUrl ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img src={f.imageUrl} alt={f.name} className="h-full w-full object-cover" />
                     ) : (
-                      <div className="flex h-full w-full items-center justify-center text-xs text-[var(--foreground)]/40">img</div>
+                      <div className="flex h-full w-full items-center justify-center text-xs text-gray-400">img</div>
                     )}
                   </div>
                   )}
@@ -357,17 +357,17 @@ function ProductModal({ initial, categories, onClose, onSaved }: { initial: any;
                     placeholder={V1.placeholder}
                     value={f.name}
                     onChange={(e) => updateFlavor(i, { name: e.target.value })}
-                    className="flex-1 rounded-lg border border-[var(--accent)] bg-white px-2 py-1 text-sm"
+                    className="flex-1 rounded-lg border border-gray-300 bg-white text-gray-900 px-2 py-1 text-sm"
                   />
                   <input
                     type="number"
                     placeholder="+€"
                     value={f.surcharge || 0}
                     onChange={(e) => updateFlavor(i, { surcharge: parseFloat(e.target.value) || 0 })}
-                    className="w-20 rounded-lg border border-[var(--accent)] bg-white px-2 py-1 text-sm"
+                    className="w-20 rounded-lg border border-gray-300 bg-white text-gray-900 px-2 py-1 text-sm"
                   />
                   {V1.hasImage && (
-                  <label className="flex cursor-pointer items-center gap-1 rounded-md border border-[var(--primary)] px-2 py-1 text-[10px] uppercase text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white">
+                  <label className="flex cursor-pointer items-center gap-1 rounded-md border border-[var(--primary)] px-2 py-1 text-[10px] uppercase text-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--background)]">
                     <Upload className="h-3 w-3" /> Image
                     <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && uploadFlavorImage(i, e.target.files[0])} />
                   </label>
@@ -383,29 +383,29 @@ function ProductModal({ initial, categories, onClose, onSaved }: { initial: any;
 
           {/* Variant 2 (sizes) */}
           {V2.enabled && (
-          <div className="rounded-xl border border-[var(--accent)] p-4">
+          <div className="rounded-xl border border-gray-200 p-4">
             <div className="mb-3 flex items-center justify-between">
               <h3 className="text-sm font-semibold uppercase tracking-wider">{V2.label}</h3>
               <button type="button" onClick={addSize} className="flex items-center gap-1 text-xs text-[var(--primary)] hover:underline">
                 <Plus className="h-3 w-3" /> Ajouter {V2.labelSingular}
               </button>
             </div>
-            {form.sizes.length === 0 && <p className="text-xs text-[var(--foreground)]/50">Aucun(e) {V2.labelSingular} — prix de base unique.</p>}
+            {form.sizes.length === 0 && <p className="text-xs text-gray-400">Aucun(e) {V2.labelSingular} — prix de base unique.</p>}
             <div className="space-y-3">
               {form.sizes.map((s: any, i: number) => (
-                <div key={s._id || i} className="flex items-center gap-3 rounded-lg bg-[var(--muted)] p-3">
+                <div key={s._id || i} className="flex items-center gap-3 rounded-lg bg-gray-50 p-3">
                   <input
                     placeholder={V2.placeholder}
                     value={s.name}
                     onChange={(e) => updateSize(i, { name: e.target.value })}
-                    className="flex-1 rounded-lg border border-[var(--accent)] bg-white px-2 py-1 text-sm"
+                    className="flex-1 rounded-lg border border-gray-300 bg-white text-gray-900 px-2 py-1 text-sm"
                   />
                   <input
                     type="number"
                     placeholder="+€"
                     value={s.surcharge || 0}
                     onChange={(e) => updateSize(i, { surcharge: parseFloat(e.target.value) || 0 })}
-                    className="w-20 rounded-lg border border-[var(--accent)] bg-white px-2 py-1 text-sm"
+                    className="w-20 rounded-lg border border-gray-300 bg-white text-gray-900 px-2 py-1 text-sm"
                   />
                   <button type="button" onClick={() => removeSize(i)} className="text-red-600">
                     <Trash2 className="h-4 w-4" />
@@ -417,16 +417,16 @@ function ProductModal({ initial, categories, onClose, onSaved }: { initial: any;
           )}
         </div>
 
-        {error && <div className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</div>}
+        {error && <div className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-600">{error}</div>}
 
         <div className="mt-6 flex justify-end gap-3">
-          <button onClick={onClose} className="rounded-sm border border-[var(--accent)] px-6 py-3 text-xs font-semibold uppercase tracking-widest">
+          <button onClick={onClose} className="rounded-sm border border-gray-200 px-6 py-3 text-xs font-semibold uppercase tracking-widest">
             Annuler
           </button>
           <button
             onClick={save}
             disabled={saving}
-            className="rounded-sm bg-[var(--primary)] px-6 py-3 text-xs font-semibold uppercase tracking-widest text-white hover:bg-[var(--primary-dark)] disabled:opacity-60"
+            className="rounded-sm bg-[var(--primary)] px-6 py-3 text-xs font-semibold uppercase tracking-widest text-[var(--background)] hover:bg-[var(--primary-dark)] disabled:opacity-60"
           >
             {saving ? "Enregistrement…" : "Enregistrer"}
           </button>
@@ -444,7 +444,7 @@ function Field({ label, value, onChange, type = "text" }: { label: string; value
         type={type}
         value={value ?? ""}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-[var(--accent)] px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
+        className="w-full rounded-lg border border-gray-300 bg-white text-gray-900 px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
       />
     </div>
   );

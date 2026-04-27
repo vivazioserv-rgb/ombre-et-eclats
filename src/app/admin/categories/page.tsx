@@ -27,7 +27,7 @@ export default function AdminCategoriesPage() {
         <h1 className="font-serif text-3xl">Catégories</h1>
         <button
           onClick={() => setEditing({ name: "", emoji: "", imageUrl: "", active: true })}
-          className="flex items-center gap-2 rounded-sm bg-[var(--primary)] px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white hover:bg-[var(--primary-dark)]"
+          className="flex items-center gap-2 rounded-sm bg-[var(--primary)] px-4 py-2 text-xs font-semibold uppercase tracking-widest text-[var(--background)] hover:bg-[var(--primary-dark)]"
         >
           <Plus className="h-4 w-4" /> Nouvelle
         </button>
@@ -36,7 +36,7 @@ export default function AdminCategoriesPage() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cats.map((c) => (
           <div key={c._id} className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm">
-            <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-full bg-[var(--accent)]">
+            <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-full bg-white">
               {c.imageUrl ? (
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img src={c.imageUrl} alt={c.name} className="h-full w-full object-cover" />
@@ -46,7 +46,7 @@ export default function AdminCategoriesPage() {
             </div>
             <div className="flex-1">
               <h3 className="font-medium">{c.name}</h3>
-              <p className="text-xs text-[var(--foreground)]/60">{c.active ? "Active" : "Inactive"}</p>
+              <p className="text-xs text-gray-500">{c.active ? "Active" : "Inactive"}</p>
             </div>
             <button onClick={() => setEditing(c)} className="text-[var(--primary)]">
               <Edit className="h-4 w-4" />
@@ -113,23 +113,23 @@ function CategoryModal({ initial, onClose, onSaved }: { initial: any; onClose: (
         <div className="space-y-4">
           <div>
             <label className="mb-2 block text-xs font-semibold uppercase tracking-wider">Nom *</label>
-            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full rounded-lg border border-[var(--accent)] px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none" />
+            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full rounded-lg border border-gray-300 bg-white text-gray-900 px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none" />
           </div>
           <div>
             <label className="mb-2 block text-xs font-semibold uppercase tracking-wider">Image de la catégorie</label>
-            <p className="mb-3 text-xs text-[var(--foreground)]/50">Format carré recommandé — recadrée et compressée automatiquement.</p>
+            <p className="mb-3 text-xs text-gray-400">Format carré recommandé — recadrée et compressée automatiquement.</p>
             <div className="flex items-center gap-4">
-              <div className="h-20 w-20 overflow-hidden rounded-full bg-[var(--accent)]">
+              <div className="h-20 w-20 overflow-hidden rounded-full bg-white">
                 {form.imageUrl ? (
                   /* eslint-disable-next-line @next/next/no-img-element */
                   <img src={form.imageUrl} alt="" className="h-full w-full object-cover" />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center text-2xl text-[var(--foreground)]/30">
+                  <div className="flex h-full w-full items-center justify-center text-2xl text-gray-300">
                     {form.emoji || "?"}
                   </div>
                 )}
               </div>
-              <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-[var(--primary)] px-4 py-2 text-xs text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white">
+              <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-[var(--primary)] px-4 py-2 text-xs text-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--background)]">
                 <Upload className="h-4 w-4" /> {uploading ? "Traitement…" : form.imageUrl ? "Changer" : "Uploader"}
                 <input type="file" accept="image/*" onChange={handleImage} className="hidden" />
               </label>
@@ -146,7 +146,7 @@ function CategoryModal({ initial, onClose, onSaved }: { initial: any; onClose: (
               value={form.emoji || ""}
               onChange={(e) => setForm({ ...form, emoji: e.target.value })}
               placeholder="🍰"
-              className="w-full rounded-lg border border-[var(--accent)] px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
+              className="w-full rounded-lg border border-gray-300 bg-white text-gray-900 px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
             />
           </div>
           <label className="flex items-center gap-2">
@@ -155,13 +155,13 @@ function CategoryModal({ initial, onClose, onSaved }: { initial: any; onClose: (
           </label>
         </div>
 
-        {error && <div className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</div>}
+        {error && <div className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-600">{error}</div>}
 
         <div className="mt-6 flex justify-end gap-3">
-          <button onClick={onClose} className="rounded-sm border border-[var(--accent)] px-6 py-3 text-xs font-semibold uppercase tracking-widest">
+          <button onClick={onClose} className="rounded-sm border border-gray-200 px-6 py-3 text-xs font-semibold uppercase tracking-widest">
             Annuler
           </button>
-          <button onClick={save} disabled={saving} className="rounded-sm bg-[var(--primary)] px-6 py-3 text-xs font-semibold uppercase tracking-widest text-white hover:bg-[var(--primary-dark)] disabled:opacity-60">
+          <button onClick={save} disabled={saving} className="rounded-sm bg-[var(--primary)] px-6 py-3 text-xs font-semibold uppercase tracking-widest text-[var(--background)] hover:bg-[var(--primary-dark)] disabled:opacity-60">
             {saving ? "…" : "Enregistrer"}
           </button>
         </div>

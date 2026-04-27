@@ -38,7 +38,7 @@ export default function AdminOrdersPage() {
       <div className="mb-6 flex flex-wrap gap-2">
         <button
           onClick={() => setFilter("")}
-          className={`rounded-full px-4 py-2 text-xs uppercase tracking-wider ${!filter ? "bg-[var(--primary)] text-white" : "border border-[var(--primary)] text-[var(--primary)]"}`}
+          className={`rounded-full px-4 py-2 text-xs uppercase tracking-wider ${!filter ? "bg-[#6c5ce7] text-white" : "border border-[#6c5ce7] text-[#6c5ce7]"}`}
         >
           Toutes
         </button>
@@ -46,7 +46,7 @@ export default function AdminOrdersPage() {
           <button
             key={s.key}
             onClick={() => setFilter(s.key)}
-            className={`rounded-full px-4 py-2 text-xs uppercase tracking-wider ${filter === s.key ? "bg-[var(--primary)] text-white" : "border border-[var(--primary)] text-[var(--primary)]"}`}
+            className={`rounded-full px-4 py-2 text-xs uppercase tracking-wider ${filter === s.key ? "bg-[#6c5ce7] text-white" : "border border-[#6c5ce7] text-[#6c5ce7]"}`}
           >
             {s.label}
           </button>
@@ -56,7 +56,7 @@ export default function AdminOrdersPage() {
       {loading ? (
         <p>Chargement…</p>
       ) : orders.length === 0 ? (
-        <p className="py-20 text-center text-[var(--foreground)]/60">Aucune commande</p>
+        <p className="py-20 text-center text-gray-500">Aucune commande</p>
       ) : (
         <div className="space-y-3">
           {orders.map((o) => {
@@ -69,26 +69,26 @@ export default function AdminOrdersPage() {
                       <h3 className="font-medium">{o.client}</h3>
                       <span className={`rounded-full px-2 py-0.5 text-[10px] ${st?.color}`}>{st?.label}</span>
                       {o.paymentStatus && (
-                        <span className={`rounded-full px-2 py-0.5 text-[10px] ${o.paymentStatus === "paid" ? "bg-green-100 text-green-700" : o.paymentStatus === "failed" ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-600"}`}>
+                        <span className={`rounded-full px-2 py-0.5 text-[10px] ${o.paymentStatus === "paid" ? "bg-green-100 text-green-700" : o.paymentStatus === "failed" ? "bg-red-100 text-red-700" : "bg-gray-50 text-gray-500"}`}>
                           {o.paymentStatus === "paid" ? "Payée" : o.paymentStatus === "failed" ? "Échec paiement" : "Non payée"}
                         </span>
                       )}
                     </div>
-                    <p className="mt-1 text-xs text-[var(--foreground)]/60">
+                    <p className="mt-1 text-xs text-gray-500">
                       {o.email} · {o.phone || "—"} · {new Date(o.createdAt).toLocaleString("fr-FR")}
                     </p>
                     {o.pickupDate && (
-                      <p className="mt-1 text-xs text-[var(--foreground)]/60">
+                      <p className="mt-1 text-xs text-gray-500">
                         Retrait : {o.pickupDate} à {o.slot}
                       </p>
                     )}
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="font-serif text-lg text-[var(--primary)]">{o.total?.toFixed(2)}€</span>
+                    <span className="font-serif text-lg text-[#6c5ce7]">{o.total?.toFixed(2)}€</span>
                     <select
                       value={o.status}
                       onChange={(e) => updateStatus(o._id, e.target.value)}
-                      className="rounded-lg border border-[var(--accent)] px-2 py-1 text-xs"
+                      className="rounded-lg border border-gray-300 bg-white text-gray-900 px-2 py-1 text-xs"
                     >
                       {STATUSES.map((s) => (
                         <option key={s.key} value={s.key}>
@@ -96,26 +96,26 @@ export default function AdminOrdersPage() {
                         </option>
                       ))}
                     </select>
-                    <button onClick={() => setExpanded(expanded === o._id ? null : o._id)} className="text-xs text-[var(--primary)]">
+                    <button onClick={() => setExpanded(expanded === o._id ? null : o._id)} className="text-xs text-[#6c5ce7]">
                       {expanded === o._id ? "Masquer" : "Détails"}
                     </button>
                   </div>
                 </div>
                 {expanded === o._id && (
-                  <div className="mt-4 border-t border-[var(--accent)] pt-4 text-sm">
+                  <div className="mt-4 border-t border-gray-200 pt-4 text-sm">
                     <ul className="space-y-1">
                       {o.items?.map((i: any, idx: number) => (
                         <li key={idx} className="flex justify-between">
                           <span>
                             {i.quantity}× {i.name}
-                            {(i.flavor || i.size) && <span className="text-[var(--foreground)]/60"> — {[i.flavor, i.size].filter(Boolean).join(" · ")}</span>}
+                            {(i.flavor || i.size) && <span className="text-gray-500"> — {[i.flavor, i.size].filter(Boolean).join(" · ")}</span>}
                           </span>
                           <span>{(i.price * i.quantity).toFixed(2)}€</span>
                         </li>
                       ))}
                     </ul>
                     {o.note && (
-                      <p className="mt-3 rounded-lg bg-[var(--muted)] p-3 text-xs">
+                      <p className="mt-3 rounded-lg bg-gray-50 p-3 text-xs">
                         <strong>Note :</strong> {o.note}
                       </p>
                     )}

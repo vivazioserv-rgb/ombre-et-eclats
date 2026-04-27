@@ -32,7 +32,7 @@ export default function AdminDashboardPage() {
     <div>
       <h1 className="mb-8 font-serif text-3xl">Tableau de bord</h1>
       {loading ? (
-        <p className="text-sm text-[var(--foreground)]/60">Chargement…</p>
+        <p className="text-sm text-gray-500">Chargement…</p>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Stat title="Produits" value={stats.products} icon={<Package className="h-5 w-5" />} />
@@ -47,11 +47,11 @@ export default function AdminDashboardPage() {
 
 function Stat({ title, value, icon, hint }: { title: string; value: string | number; icon: React.ReactNode; hint?: string }) {
   return (
-    <div className="rounded-2xl bg-white p-6 shadow-sm">
-      <div className="mb-3 flex items-center gap-2 text-[var(--primary)]">{icon}</div>
-      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]/60">{title}</p>
-      <p className="mt-1 font-serif text-3xl">{value}</p>
-      {hint && <p className="mt-1 text-xs text-[var(--foreground)]/50">{hint}</p>}
+    <div className="rounded-2xl bg-white p-6 shadow-sm border border-gray-100">
+      <div className="mb-3 flex items-center gap-2 text-[#6c5ce7]">{icon}</div>
+      <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">{title}</p>
+      <p className="mt-1 font-serif text-3xl text-gray-900">{value}</p>
+      {hint && <p className="mt-1 text-xs text-gray-400">{hint}</p>}
     </div>
   );
 }

@@ -33,28 +33,28 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[var(--muted)] p-6">
+    <main className="flex min-h-screen items-center justify-center bg-gray-100 p-6">
       <form onSubmit={submit} className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-xl">
         <div className="mb-6 flex flex-col items-center">
-          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--primary)]">
+          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#f0f0f5] text-[#6c5ce7]">
             <Lock className="h-5 w-5" />
           </div>
-          <h1 className="font-serif text-2xl">Admin {siteConfig.brand.name}</h1>
-          <p className="mt-1 text-xs text-[var(--foreground)]/60">Connectez-vous pour continuer</p>
+          <h1 className="font-serif text-2xl text-gray-900">Admin {siteConfig.brand.name}</h1>
+          <p className="mt-1 text-xs text-gray-500">Connectez-vous pour continuer</p>
         </div>
-        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider">Mot de passe</label>
+        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-gray-700">Mot de passe</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="w-full rounded-lg border border-[var(--accent)] px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
+          className="w-full rounded-lg border border-gray-300 bg-white text-gray-900 px-3 py-2 text-sm focus:border-[#6c5ce7] focus:outline-none"
         />
-        {error && <div className="mt-3 rounded-lg bg-red-50 p-2 text-xs text-red-700">{error}</div>}
+        {error && <div className="mt-3 rounded-lg bg-red-50 p-2 text-xs text-red-600">{error}</div>}
         <button
           type="submit"
           disabled={loading}
-          className="mt-4 w-full rounded-sm bg-[var(--primary)] py-3 text-xs font-semibold uppercase tracking-widest text-white hover:bg-[var(--primary-dark)] disabled:opacity-60"
+          className="mt-4 w-full rounded-sm bg-[#6c5ce7] py-3 text-xs font-semibold uppercase tracking-widest text-white hover:bg-[#5a4bd1] disabled:opacity-60"
         >
           {loading ? "Connexion…" : "Se connecter"}
         </button>

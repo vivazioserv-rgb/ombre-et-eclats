@@ -65,7 +65,7 @@ export default function AdminSettingsPage() {
               rows={2}
               value={settings.heroSubtitle || ""}
               onChange={(e) => setSettings({ ...settings, heroSubtitle: e.target.value })}
-              className="w-full rounded-lg border border-[var(--accent)] px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
+              className="w-full rounded-lg border border-gray-300 bg-white text-gray-900 px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
             />
           </div>
           <div>
@@ -73,9 +73,9 @@ export default function AdminSettingsPage() {
             <div className="flex items-center gap-4">
               {settings.heroImageUrl && (
                 /* eslint-disable-next-line @next/next/no-img-element */
-                <img src={settings.heroImageUrl} alt="Hero" className="h-24 w-24 rounded-full object-cover ring-2 ring-white shadow-md" />
+                <img src={settings.heroImageUrl} alt="Hero" className="h-24 w-24 rounded-full object-cover ring-2 ring-gray-200 shadow-md" />
               )}
-              <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-[var(--primary)] px-4 py-2 text-xs text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white">
+              <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-[var(--primary)] px-4 py-2 text-xs text-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--background)]">
                 <Upload className="h-4 w-4" /> {uploadingHero ? "Upload…" : "Changer l'image"}
                 <input type="file" accept="image/*" onChange={handleHero} className="hidden" />
               </label>
@@ -109,7 +109,7 @@ export default function AdminSettingsPage() {
               value={settings.about || ""}
               onChange={(e) => setSettings({ ...settings, about: e.target.value })}
               placeholder="Décrivez votre histoire, vos valeurs…"
-              className="w-full rounded-lg border border-[var(--accent)] px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
+              className="w-full rounded-lg border border-gray-300 bg-white text-gray-900 px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
             />
           </div>
         </Card>
@@ -124,12 +124,12 @@ export default function AdminSettingsPage() {
         </Card>
 
         {msg && <div className="rounded-lg bg-green-50 p-3 text-sm text-green-700">{msg}</div>}
-        {err && <div className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{err}</div>}
+        {err && <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600">{err}</div>}
 
         <button
           onClick={save}
           disabled={saving}
-          className="flex items-center gap-2 rounded-sm bg-[var(--primary)] px-6 py-3 text-xs font-semibold uppercase tracking-widest text-white hover:bg-[var(--primary-dark)] disabled:opacity-60"
+          className="flex items-center gap-2 rounded-sm bg-[var(--primary)] px-6 py-3 text-xs font-semibold uppercase tracking-widest text-[var(--background)] hover:bg-[var(--primary-dark)] disabled:opacity-60"
         >
           <Save className="h-4 w-4" /> {saving ? "Enregistrement…" : "Enregistrer"}
         </button>
@@ -155,7 +155,7 @@ function Field({ label, value, onChange, type = "text" }: { label: string; value
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-[var(--accent)] px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
+        className="w-full rounded-lg border border-gray-300 bg-white text-gray-900 px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
       />
     </div>
   );
@@ -167,7 +167,7 @@ function WeekdayPicker({ value, onChange }: { value: number[]; onChange: (v: num
   return (
     <div>
       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider">Jours d&apos;ouverture</label>
-      <p className="mb-3 text-xs text-[var(--foreground)]/50">Décochez vos jours de fermeture (ex : dimanche et lundi).</p>
+      <p className="mb-3 text-xs text-gray-400">Décochez vos jours de fermeture (ex : dimanche et lundi).</p>
       <div className="flex flex-wrap gap-2">
         {WEEKDAYS.map((name, idx) => {
           const active = value.includes(idx);
@@ -180,7 +180,7 @@ function WeekdayPicker({ value, onChange }: { value: number[]; onChange: (v: num
                 else onChange([...value, idx].sort());
               }}
               className={`rounded-full px-4 py-2 text-xs font-medium transition-colors ${
-                active ? "bg-[var(--primary)] text-white" : "border border-[var(--accent)] text-[var(--foreground)]/60"
+                active ? "bg-[var(--primary)] text-[var(--background)]" : "border border-gray-200 text-gray-500"
               }`}
             >
               {name}
@@ -202,7 +202,7 @@ function ClosedDatesPicker({ value, onChange }: { value: string[]; onChange: (v:
           type="date"
           value={newDate}
           onChange={(e) => setNewDate(e.target.value)}
-          className="flex-1 rounded-lg border border-[var(--accent)] px-3 py-2 text-sm"
+          className="flex-1 rounded-lg border border-gray-300 bg-white text-gray-900 px-3 py-2 text-sm"
         />
         <button
           type="button"
@@ -211,17 +211,17 @@ function ClosedDatesPicker({ value, onChange }: { value: string[]; onChange: (v:
             onChange([...value, newDate].sort());
             setNewDate("");
           }}
-          className="rounded-sm bg-[var(--primary)] px-4 text-xs font-semibold uppercase tracking-widest text-white"
+          className="rounded-sm bg-[var(--primary)] px-4 text-xs font-semibold uppercase tracking-widest text-[var(--background)]"
         >
           Ajouter
         </button>
       </div>
       {value.length === 0 ? (
-        <p className="text-xs text-[var(--foreground)]/50">Aucune date fermée</p>
+        <p className="text-xs text-gray-400">Aucune date fermée</p>
       ) : (
         <div className="flex flex-wrap gap-2">
           {value.map((d) => (
-            <span key={d} className="flex items-center gap-2 rounded-full bg-[var(--muted)] px-3 py-1 text-xs">
+            <span key={d} className="flex items-center gap-2 rounded-full bg-gray-50 px-3 py-1 text-xs">
               {d}
               <button type="button" onClick={() => onChange(value.filter((x) => x !== d))} className="text-red-600">
                 ×

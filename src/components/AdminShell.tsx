@@ -41,11 +41,21 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
   }
 
   return (
-    <div className="flex min-h-screen bg-[var(--muted)]">
-      <aside className="w-64 border-r border-[var(--accent)] bg-white">
-        <div className="border-b border-[var(--accent)] p-6">
-          <Link href="/admin" className="font-serif text-2xl text-[var(--primary-dark)]">
-            {siteConfig.brand.name} Admin
+    <div
+      className="flex min-h-screen"
+      style={{
+        "--background": "#ffffff",
+        "--foreground": "#1a1a2e",
+        "--primary": "#6c5ce7",
+        "--primary-dark": "#5a4bd1",
+        "--accent": "#f0f0f5",
+        "--muted": "#f7f7fa",
+      } as React.CSSProperties}
+    >
+      <aside className="w-64 border-r border-gray-200 bg-[#1a1a2e]">
+        <div className="border-b border-white/10 p-6">
+          <Link href="/admin" className="font-serif text-2xl text-white">
+            {siteConfig.brand.name} <span className="text-[#a29bfe]">Admin</span>
           </Link>
         </div>
         <nav className="space-y-1 p-3">
@@ -58,8 +68,8 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                 href={n.href}
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                   active
-                    ? "bg-[var(--primary)] text-white"
-                    : "text-[var(--foreground)]/80 hover:bg-[var(--muted)]"
+                    ? "bg-[#6c5ce7] text-white"
+                    : "text-white/70 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 <Icon className="h-4 w-4" />
@@ -68,16 +78,16 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             );
           })}
         </nav>
-        <div className="border-t border-[var(--accent)] p-3">
-          <Link href="/" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-[var(--foreground)]/60 hover:bg-[var(--muted)]">
+        <div className="border-t border-white/10 p-3">
+          <Link href="/" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-white/50 hover:bg-white/10 hover:text-white">
             <Home className="h-4 w-4" /> Voir le site
           </Link>
-          <button onClick={logout} className="mt-1 flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-red-600 hover:bg-red-50">
+          <button onClick={logout} className="mt-1 flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-red-400 hover:bg-red-900/20">
             <LogOut className="h-4 w-4" /> Déconnexion
           </button>
         </div>
       </aside>
-      <main className="flex-1 overflow-auto p-10">{children}</main>
+      <main className="flex-1 overflow-auto bg-[var(--muted)] p-10 text-[var(--foreground)]">{children}</main>
     </div>
   );
 }
