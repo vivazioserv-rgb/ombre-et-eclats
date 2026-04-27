@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { client, email, items, total } = body;
-    if (!client || !email || !items?.length || !total) {
+    if (!client || !email || !items?.length || total === undefined || total === null) {
       return NextResponse.json({ error: "Champs obligatoires manquants" }, { status: 400 });
     }
     const o = await Order.create(body);
