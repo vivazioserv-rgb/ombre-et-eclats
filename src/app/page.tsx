@@ -166,7 +166,7 @@ export default async function HomePage() {
             <div className="relative aspect-square overflow-hidden rounded-2xl shadow-inner md:aspect-auto">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://images.unsplash.com/photo-1518544866330-95a2bec01dbb?w=1200&auto=format&fit=crop&q=85"
+                src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=1200&auto=format&fit=crop&q=85"
                 alt="Atelier de gravure"
                 className="h-full w-full object-cover"
               />
