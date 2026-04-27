@@ -61,8 +61,11 @@ export default function Navbar({ brandName = siteConfig.brand.name }: { brandNam
 
         {mobileOpen && (
           <div className="fixed inset-0 z-50 flex md:hidden">
-            <div className="flex-1 bg-black/60" onClick={() => setMobileOpen(false)} />
-            <aside className="w-72 border-l border-[var(--accent)] bg-[var(--background)] p-6 shadow-2xl">
+            <div className="flex-1 bg-black/70" onClick={() => setMobileOpen(false)} />
+            <aside
+              className="w-72 border-l border-[var(--accent)] p-6 shadow-2xl"
+              style={{ backgroundColor: "#0a0a0a", color: "#f5f1e8" }}
+            >
               <button onClick={() => setMobileOpen(false)} className="mb-6 ml-auto block">
                 <X className="h-5 w-5" />
               </button>
