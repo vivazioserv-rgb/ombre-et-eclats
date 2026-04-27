@@ -21,14 +21,12 @@ export default function Navbar({ brandName = siteConfig.brand.name }: { brandNam
       </div>
       <header className="sticky top-0 z-40 border-b border-[var(--accent)] bg-black/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:h-20">
-          <Link href="/" className="relative flex items-center" aria-label={brandName}>
-            {/* Logo overflows the navbar on both sides for a larger, elegant look */}
+          <Link href="/" className="flex items-center" aria-label={brandName}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={siteConfig.brand.logoUrl}
               alt={brandName}
-              className="h-28 w-auto object-contain md:h-36"
-              style={{ marginTop: "-0.5rem", marginBottom: "-0.5rem" }}
+              className="h-12 w-auto object-contain md:h-14"
             />
           </Link>
           <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
