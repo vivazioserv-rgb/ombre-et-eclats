@@ -2,13 +2,14 @@
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { LayoutDashboard, Package, Tag, ClipboardList, Settings as SettingsIcon, LogOut, Home } from "lucide-react";
+import { LayoutDashboard, Package, Tag, ClipboardList, Settings as SettingsIcon, LogOut, Home, Sparkles } from "lucide-react";
 import { siteConfig } from "@/site.config";
 import { TOKEN_KEY } from "@/lib/storage";
 
 const nav = [
   { href: "/admin", label: "Tableau de bord", icon: LayoutDashboard },
   { href: "/admin/produits", label: "Produits", icon: Package },
+  { href: "/admin/import-ia", label: "Import IA", icon: Sparkles },
   { href: "/admin/categories", label: "Catégories", icon: Tag },
   { href: "/admin/commandes", label: "Commandes", icon: ClipboardList },
   { href: "/admin/parametres", label: "Paramètres", icon: SettingsIcon },
