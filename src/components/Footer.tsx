@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CreditCard, Award, Headphones, Truck } from "lucide-react";
+import { CreditCard, Award, Truck, Camera, Music2, Share2 } from "lucide-react";
 import { siteConfig } from "@/site.config";
 
 export default function Footer({ brandName = siteConfig.brand.name }: { brandName?: string }) {
@@ -28,6 +28,25 @@ export default function Footer({ brandName = siteConfig.brand.name }: { brandNam
           </div>
         </div>
       </div>
+      {(siteConfig.social.instagram || siteConfig.social.tiktok || siteConfig.social.facebook) && (
+        <div className="flex items-center justify-center gap-4 border-t border-[var(--accent)] py-5">
+          {siteConfig.social.instagram && (
+            <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[var(--foreground)]/60 hover:text-[var(--primary)]">
+              <Camera className="h-4 w-4" />
+            </a>
+          )}
+          {siteConfig.social.tiktok && (
+            <a href={siteConfig.social.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-[var(--foreground)]/60 hover:text-[var(--primary)]">
+              <Music2 className="h-4 w-4" />
+            </a>
+          )}
+          {siteConfig.social.facebook && (
+            <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[var(--foreground)]/60 hover:text-[var(--primary)]">
+              <Share2 className="h-4 w-4" />
+            </a>
+          )}
+        </div>
+      )}
       <div className="border-t border-[var(--accent)] py-5 text-center text-xs text-[var(--foreground)]/50">
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link href="/a-propos" className="hover:text-[var(--primary)]">À propos</Link>

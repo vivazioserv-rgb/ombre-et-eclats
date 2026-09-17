@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Gem } from "lucide-react";
 import AddToCartButton from "./AddToCartButton";
 
 export default function ProductCard({ product }: { product: any }) {
@@ -15,7 +16,9 @@ export default function ProductCard({ product }: { product: any }) {
             /* eslint-disable-next-line @next/next/no-img-element */
             <img src={product.imageUrl} alt={product.name} className="h-full w-full object-cover transition-transform group-hover:scale-105" />
           ) : (
-            <div className="flex h-full w-full items-center justify-center text-6xl">🍰</div>
+            <div className="flex h-full w-full items-center justify-center text-[var(--primary)]/40">
+              <Gem className="h-10 w-10" strokeWidth={1.2} />
+            </div>
           )}
         </div>
       </Link>

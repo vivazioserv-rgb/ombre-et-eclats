@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartProvider";
 import CookieBanner from "@/components/CookieBanner";
+import AiAdvisor from "@/components/AiAdvisor";
 import { siteConfig } from "@/site.config";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CartProvider>
           {children}
           <CookieBanner />
+          <AiAdvisor />
         </CartProvider>
       </body>
     </html>

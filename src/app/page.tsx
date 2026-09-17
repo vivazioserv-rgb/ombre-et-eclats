@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Truck, Award, Gem, MessageCircle } from "lucide-react";
+import { Truck, Award, Gem, MessageCircle, Star, Camera } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Cart from "@/components/Cart";
@@ -53,6 +53,21 @@ export default async function HomePage() {
               <p className="mt-8 max-w-xl text-justify text-base leading-relaxed text-[var(--foreground)]/70">
                 {heroSubtitle}
               </p>
+              {siteConfig.features.socialProof && (
+                <div className="mt-6 flex items-center gap-2 text-[var(--foreground)]/80">
+                  <div className="flex items-center gap-0.5">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`h-4 w-4 ${i < Math.round(siteConfig.trust.rating) ? "fill-[var(--primary)] text-[var(--primary)]" : "text-[var(--primary)]/30"}`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-xs">
+                    {siteConfig.trust.rating.toFixed(1)}/5 · {siteConfig.trust.reviewsCount} {siteConfig.trust.reviewsSource.toLowerCase()}
+                  </span>
+                </div>
+              )}
               <div className="mt-10 flex flex-wrap gap-3">
                 <Link
                   href="/catalogue"
@@ -93,6 +108,41 @@ export default async function HomePage() {
             <FeatureItem icon={<Truck className="h-5 w-5 text-[var(--primary)]" />} title="Livraison offerte" text="Expédition en 48h dès 80€" />
           </div>
         </section>
+
+        {/* Preuve sociale / Témoignages */}
+        {siteConfig.features.socialProof && siteConfig.testimonials.length > 0 && (
+          <section className="py-20">
+            <div className="mx-auto max-w-7xl px-6">
+              <SectionHeader title="ILS NOUS FONT CONFIANCE" />
+              <div className="mx-auto mb-10 flex max-w-md flex-col items-center gap-2 text-center">
+                <div className="flex items-center gap-1">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-5 w-5 ${i < Math.round(siteConfig.trust.rating) ? "fill-[var(--primary)] text-[var(--primary)]" : "text-[var(--primary)]/30"}`}
+                    />
+                  ))}
+                </div>
+                <p className="text-sm text-[var(--foreground)]/70">
+                  <strong className="text-[var(--foreground)]">{siteConfig.trust.rating.toFixed(1)}/5</strong> sur {siteConfig.trust.reviewsCount} {siteConfig.trust.reviewsSource.toLowerCase()}
+                </p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-3">
+                {siteConfig.testimonials.map((t, i) => (
+                  <div key={i} className="rounded-2xl border border-[var(--accent)] bg-[var(--muted)] p-6">
+                    <div className="mb-3 flex items-center gap-0.5">
+                      {Array.from({ length: 5 }).map((_, j) => (
+                        <Star key={j} className={`h-3.5 w-3.5 ${j < t.rating ? "fill-[var(--primary)] text-[var(--primary)]" : "text-[var(--primary)]/30"}`} />
+                      ))}
+                    </div>
+                    <p className="text-sm italic leading-relaxed text-[var(--foreground)]/80">&laquo; {t.text} &raquo;</p>
+                    <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[var(--primary)]">{t.name}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Catégories */}
         {categories.length > 0 && (
@@ -193,6 +243,45 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
+        )}
+
+        {/* Instagram */}
+        {siteConfig.features.instagramFeed && siteConfig.instagramShots.length > 0 && (
+          <section className="bg-[var(--muted)] py-20">
+            <div className="mx-auto max-w-7xl px-6">
+              <div className="mb-12 flex flex-col items-center">
+                <h2 className="font-serif text-3xl tracking-wider">SUIVEZ-NOUS</h2>
+                {siteConfig.social.instagramHandle && (
+                  <a
+                    href={siteConfig.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 flex items-center gap-1.5 text-sm text-[var(--primary)] hover:underline"
+                  >
+                    <Camera className="h-4 w-4" /> {siteConfig.social.instagramHandle}
+                  </a>
+                )}
+                <div className="mt-3 h-px w-16 bg-[var(--primary)]" />
+              </div>
+              <div className="grid grid-cols-3 gap-3 md:grid-cols-6">
+                {siteConfig.instagramShots.map((url, i) => (
+                  <a
+                    key={i}
+                    href={siteConfig.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative aspect-square overflow-hidden rounded-lg"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={url} alt="Ombre & Éclats sur Instagram" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110" />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-black/40 group-hover:opacity-100">
+                      <Camera className="h-6 w-6 text-white" />
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
         )}
       </main>
       <Footer brandName={brandName} />

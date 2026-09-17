@@ -6,7 +6,7 @@ import Cart from "@/components/Cart";
 import ProductOrderForm from "@/components/ProductOrderForm";
 import ProductGallery from "@/components/ProductGallery";
 import ProductCard from "@/components/ProductCard";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Star } from "lucide-react";
 import { connectDb } from "@/lib/mongoose";
 import { Product, Settings } from "@/lib/models";
 import { isValidObjectId } from "mongoose";
@@ -23,6 +23,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const settings = await Settings.findOne().lean();
   const product: any = JSON.parse(JSON.stringify(p));
   const brandName = (settings as any)?.brandName || siteConfig.brand.name;
+  const phone = (settings as any)?.phone || siteConfig.contact.phone;
 
   // Suggestions: same category first, then anything else (exclude current)
   const sameCatDocs = product.category
@@ -62,6 +63,19 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 <p className="mb-2 text-xs uppercase tracking-widest text-[var(--primary)]">{product.category.name}</p>
               )}
               <h1 className="font-serif text-4xl">{product.name}</h1>
+              {siteConfig.features.socialProof && (
+                <div className="mt-2 flex items-center gap-1.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-3.5 w-3.5 ${i < Math.round(siteConfig.trust.rating) ? "fill-[var(--primary)] text-[var(--primary)]" : "text-[var(--primary)]/30"}`}
+                    />
+                  ))}
+                  <span className="text-xs text-[var(--foreground)]/60">
+                    {siteConfig.trust.rating.toFixed(1)}/5 ({siteConfig.trust.reviewsCount} avis)
+                  </span>
+                </div>
+              )}
               {product.shortDesc && <p className="mt-3 text-[var(--foreground)]/70">{product.shortDesc}</p>}
               <div className="mt-6 text-3xl font-semibold text-[var(--primary)]">
                 {product.basePrice.toFixed(2)}€
@@ -74,7 +88,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   <strong>{siteConfig.product.allergensLabel} :</strong> {product.allergens}
                 </p>
               )}
-              <ProductOrderForm product={product} />
+              <ProductOrderForm product={product} phone={phone} />
             </div>
           </div>
 

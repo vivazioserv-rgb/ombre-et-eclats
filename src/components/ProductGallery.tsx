@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { Gem } from "lucide-react";
 
 export default function ProductGallery({ images, alt }: { images: string[]; alt: string }) {
   const [active, setActive] = useState(0);
@@ -12,7 +13,9 @@ export default function ProductGallery({ images, alt }: { images: string[]; alt:
           /* eslint-disable-next-line @next/next/no-img-element */
           <img src={main} alt={alt} className="h-full w-full object-cover" />
         ) : (
-          <div className="flex h-full w-full items-center justify-center text-9xl">🍰</div>
+          <div className="flex h-full w-full items-center justify-center text-[var(--primary)]/40">
+            <Gem className="h-24 w-24" strokeWidth={1} />
+          </div>
         )}
       </div>
       {images.length > 1 && (

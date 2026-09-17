@@ -1,12 +1,13 @@
 "use client";
 import { useMemo, useState } from "react";
+import { MessageCircle } from "lucide-react";
 import { useCart } from "@/context/CartProvider";
 import { siteConfig } from "@/site.config";
 
 const V1 = siteConfig.product.variant1;
 const V2 = siteConfig.product.variant2;
 
-export default function ProductOrderForm({ product }: { product: any }) {
+export default function ProductOrderForm({ product, phone }: { product: any; phone?: string }) {
   const { addToCart } = useCart();
   const [flavor, setFlavor] = useState(product.flavors?.[0] || null);
   const [size, setSize] = useState(product.sizes?.[0] || null);
@@ -136,6 +137,19 @@ export default function ProductOrderForm({ product }: { product: any }) {
           Ajouter au panier
         </button>
       </div>
+
+      {siteConfig.features.whatsappButton && phone && (
+        <a
+          href={`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(
+            `Bonjour, j'ai une question sur la pièce « ${product.name} » (${product.basePrice.toFixed(2)}€) vue sur le site ${siteConfig.brand.name}.`
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 rounded-sm border border-[#25D366]/40 py-3 text-xs font-semibold uppercase tracking-widest text-[#25D366] hover:bg-[#25D366]/10"
+        >
+          <MessageCircle className="h-4 w-4" /> Une question ? Écrivez-nous sur WhatsApp
+        </a>
+      )}
     </div>
   );
 }
